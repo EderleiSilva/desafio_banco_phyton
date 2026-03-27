@@ -106,9 +106,9 @@ class ContaCorrente(Conta):
     
     def __str__(self):
         return f"""\
-            Agência:\t{self.agencia}
-            C/C:\t\t{self.numero}
-            Titular:\t{self.cliente._nome}
+            Agência:\t{self._agencia}
+            C/C:\t\t{self._numero}
+            Titular:\t{self._cliente.nome}
         """
 
 class Historico:
@@ -280,6 +280,17 @@ def criar_conta(numero_conta, clientes, contas):
 
     print ("\nConta criada com sucesso!")
 
+def listar_contas(contas):
+    if not contas:
+        print("\nNão existem contas cadastradas.")
+        return
+        
+    for conta in contas:
+        print("=" * 100)
+        print(textwrap.dedent(str(conta)))
+        
+
+
 def main():
     clientes = []
     contas = []
@@ -302,6 +313,9 @@ def main():
         elif opcao == "nc":
             numero_conta = len(contas) + 1
             criar_conta(numero_conta, clientes, contas)
+
+        elif opcao == "lc":
+            listar_contas(contas)
 
         elif opcao == "q":
             break
